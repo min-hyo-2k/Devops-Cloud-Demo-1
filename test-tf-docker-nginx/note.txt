@@ -1,0 +1,6 @@
+this folder is for testing deploying nginx on docker with terraform
+
+command used:
+terraform init
+terraform apply
+terraform destroy
