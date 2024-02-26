@@ -22,9 +22,11 @@ jobs:
 
     - name: Init Terraform
       run: terraform init
+      working-directory: ./Terraform
 
     - name: Apply Terraform
       run: terraform apply -auto-approve
+      working-directory: ./Terraform
     
     # - name: Destroy Terraform
     #   run: terraform destroy -auto-approve
