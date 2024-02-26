@@ -84,15 +84,6 @@ resource "aws_instance" "demo_ec2" {
   subnet_id = aws_subnet.demo_subnet.id
   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.demo_sg.id]
-  user_data = <<EOF
-    #! /bin/bash
-    sudo su
-    sudo yum update
-    sudo yum install -y httpd
-    sudo chkconfig httpd on
-    sudo service httpd start
-    echo "<h1>Deployed EC2 With Terraform</h1>" | sudo tee /var/www/html/index.html
-    EOF
   tags = {
     Name = "Demo EC2"
   }
