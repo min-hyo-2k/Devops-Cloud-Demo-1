@@ -77,6 +77,16 @@ resource "aws_security_group" "demo_sg" {
   }
 }
 
+# SSH KEY
+resource "tls_private_key" "key" {
+  algorithm = "RSA"
+}
+
+resource "aws_key_pair" "key_pair" {
+  key_name   = "ansible-key"
+  public_key = tls_private_key.key.public_key_openssh
+}
+
 # EC2 instance
 resource "aws_instance" "demo_ec2" {
   ami = "ami-0eb4694aa6f249c52"
@@ -84,6 +94,7 @@ resource "aws_instance" "demo_ec2" {
   subnet_id = aws_subnet.demo_subnet.id
   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.demo_sg.id]
+  key_name = aws_key_pair.key_pair.key_name
   tags = {
     Name = "Demo EC2"
   }
