@@ -11,6 +11,7 @@ resource "aws_vpc" "vpc_demo" {
 resource "aws_subnet" "subnet_demo" {
   vpc_id = aws_vpc.vpc_demo.id
   cidr_block = "10.0.1.0/24"
+  map_public_ip_on_launch = true
 
   tags = {
     Name = "Demo Public Subnet"
@@ -47,6 +48,7 @@ resource "aws_instance" "ec2_demo" {
   ami = "ami-0eb4694aa6f249c52"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.subnet_demo.id
+  associate_public_ip_address = true
 
   tags = {
     Name = "Demo EC2"
