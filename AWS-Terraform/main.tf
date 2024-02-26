@@ -1,12 +1,20 @@
 # VPC
 resource "aws_vpc" "vpc_demo" {
   cidr_block = "10.0.0.0/16"
+
+  tags = {
+    Name = "Demo VPC"
+  }
 }
 
 # subnet
 resource "aws_subnet" "subnet_demo" {
   vpc_id = aws_vpc.vpc_demo.id
   cidr_block = "10.0.1.0/24"
+
+  tags = {
+    Name = "Demo Public Subnet"
+  }
 }
 
 resource "aws_internet_gateway" "demo_gw" {
@@ -39,4 +47,8 @@ resource "aws_instance" "ec2_demo" {
   ami = "ami-0eb4694aa6f249c52"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.subnet_demo.id
+
+  tags = {
+    Name = "Demo EC2"
+  }
 }
