@@ -197,3 +197,5 @@ terraform.rc
 
 #custom
 .local/
+
+.terraform.lock.hcl
